@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<style xmlns="http://purl.org/net/xbiblio/csl" page-range-format="minimal" class="in-text" version="1.0" demote-non-dropping-particle="sort-only" default-locale="en-US">
+  <info>
+    <title>Vet Record (Wiley/BVA, verified against a 2026 published article)</title>
+    <id>http://www.mendeley.com/styles/custom/vet-record-bva</id>
+    <link href="http://www.mendeley.com/styles/custom/vet-record-bva" rel="self"/>
+    <link href="http://www.zotero.org/styles/elsevier-vancouver" rel="template"/>
+    <author>
+      <name>Adapted for Vet Record / Vet Record Open / Vet Record Case Reports, checked against BVA style guide and a live 2026 Wiley Vet Record article</name>
+    </author>
+    <category citation-format="numeric"/>
+    <category field="medicine"/>
+    <summary>Modified Vancouver style for Vet Record: superscript numbered citations (no brackets), in order of appearance, non-consecutive numbers separated by ", " and consecutive runs collapsed to a range; reference list gives all authors if 6 or fewer, otherwise the first 6 followed by "et al"; year not in parentheses; format is Journal. Year;vol:start page-end page.</summary>
+    <updated>2026-09-21T00:00:00+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+  </info>
+  <locale xml:lang="en">
+    <terms>
+      <term name="et-al">et al</term>
+    </terms>
+  </locale>
+  <macro name="author">
+    <names variable="author">
+      <name initialize-with="" delimiter=", " delimiter-precedes-last="always" name-as-sort-order="all" sort-separator=" " et-al-min="7" et-al-use-first="6"/>
+      <label form="long" prefix=", " strip-periods="true"/>
+      <substitute>
+        <names variable="editor"/>
+        <names variable="translator"/>
+      </substitute>
+    </names>
+  </macro>
+  <macro name="editor">
+    <names variable="editor">
+      <name initialize-with="" delimiter=", " delimiter-precedes-last="always" name-as-sort-order="all" sort-separator=" "/>
+      <label form="long" prefix=", " suffix="." strip-periods="true"/>
+    </names>
+  </macro>
+  <macro name="year-date">
+    <choose>
+      <if variable="issued">
+        <date variable="issued">
+          <date-part name="year"/>
+        </date>
+      </if>
+      <else>
+        <text term="no date" form="short"/>
+      </else>
+    </choose>
+  </macro>
+  <macro name="publisher">
+    <text variable="publisher-place" suffix=": " text-case="title"/>
+    <text variable="publisher" suffix="; "/>
+    <text macro="year-date"/>
+  </macro>
+  <macro name="edition">
+    <choose>
+      <if is-numeric="edition">
+        <group delimiter=" ">
+          <number variable="edition" form="ordinal"/>
+          <text term="edition" form="short"/>
+        </group>
+      </if>
+      <else>
+        <text variable="edition"/>
+      </else>
+    </choose>
+  </macro>
+  <citation collapse="citation-number">
+    <sort>
+      <key variable="citation-number"/>
+    </sort>
+    <layout delimiter=", " vertical-align="sup">
+      <text variable="citation-number"/>
+    </layout>
+  </citation>
+  <bibliography entry-spacing="0" second-field-align="flush" et-al-min="7" et-al-use-first="6">
+    <layout suffix=".">
+      <text variable="citation-number" suffix=". "/>
+      <text macro="author" suffix=". "/>
+      <choose>
+        <if type="bill book graphic legal_case legislation motion_picture report song" match="any">
+          <group delimiter=". ">
+            <text variable="title"/>
+            <text macro="edition"/>
+            <text macro="publisher"/>
+          </group>
+        </if>
+        <else-if type="chapter paper-conference" match="any">
+          <group delimiter=", ">
+            <group delimiter=". ">
+              <text variable="title"/>
+              <group>
+                <text term="in" text-case="sentence" suffix=": "/>
+                <text macro="editor"/>
+              </group>
+              <group delimiter=", ">
+                <text variable="container-title" form="short"/>
+                <text variable="volume" prefix="vol. "/>
+              </group>
+            </group>
+            <text macro="publisher"/>
+            <group delimiter=" ">
+              <label variable="page" form="short" plural="never"/>
+              <text variable="page"/>
+            </group>
+          </group>
+        </else-if>
+        <else-if type="patent">
+          <group delimiter=", ">
+            <group delimiter=". ">
+              <text variable="title"/>
+              <text variable="number" prefix="U.S. Patent "/>
+            </group>
+            <text macro="year-date"/>
+          </group>
+        </else-if>
+        <else-if type="thesis">
+          <group delimiter=". ">
+            <text variable="title"/>
+            <text variable="genre"/>
+            <group delimiter=", ">
+              <text variable="publisher"/>
+              <text macro="year-date"/>
+            </group>
+          </group>
+        </else-if>
+        <else>
+          <group delimiter=":">
+            <group delimiter=". ">
+              <group delimiter=". ">
+                <text variable="title"/>
+                <text variable="container-title" form="short" text-case="title" strip-periods="true"/>
+              </group>
+              <group delimiter=";">
+                <text macro="year-date"/>
+                <text variable="volume"/>
+              </group>
+            </group>
+            <text variable="page" form="short"/>
+          </group>
+        </else>
+      </choose>
+    </layout>
+  </bibliography>
+</style>
